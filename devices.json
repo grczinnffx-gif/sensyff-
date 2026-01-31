@@ -1,1 +1,13 @@
-
+{
+  "Samsung": {
+    "Galaxy S23": { "dpi": 425, "tela": 6.1 },
+    "Galaxy S23 Ultra": { "dpi": 500, "tela": 6.8 }
+  },
+  "Xiaomi": {
+    "Redmi Note 12": { "dpi": 395, "tela": 6.67 },
+    "POCO X5 Pro": { "dpi": 395, "tela": 6.67 }
+  },
+  "Motorola": {
+    "Moto G54": { "dpi": 405, "tela": 6.5 }
+  }
+}
