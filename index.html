@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SensyFF</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<!-- TELA DE CARREGAMENTO -->
+<div id="splash">
+  <img src="logo.png" alt="SensyFF">
+  <p>Analisando seu dispositivo...</p>
+</div>
+
+<!-- APLICATIVO -->
+<div id="app" class="hidden">
+
+  <h1>🔥 SensyFF</h1>
+
+  <label>🎮 Estilo de jogo</label>
+  <select id="estilo">
+    <option value="165">Rush / X1</option>
+    <option value="150">Balanceado</option>
+    <option value="135">Precisão</option>
+  </select>
+
+  <label>📱 Marca do celular</label>
+  <select id="marca" onchange="carregarModelos()"></select>
+
+  <label>📲 Modelo do celular</label>
+  <select id="modelo"></select>
+
+  <label>⚡ Taxa da tela</label>
+  <select id="hz">
+    <option value="0">60 Hz</option>
+    <option value="5">90 Hz</option>
+    <option value="8">120 Hz</option>
+    <option value="10">144 Hz+</option>
+  </select>
+
+  <button onclick="gerar()">GERAR SENSIBILIDADE</button>
+
+  <div id="resultado"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
