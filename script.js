@@ -1,119 +1,81 @@
 let devices = {};
 
-/* ===============================
-   CARREGAMENTO DA BASE
-================================ */
+// Splash SEMPRE some
+setTimeout(() => {
+  const splash = document.getElementById("splash");
+  const app = document.getElementById("app");
+  if (splash) splash.style.display = "none";
+  if (app) app.classList.remove("hidden");
+}, 1500);
+
+// Carrega base com proteção
 fetch("devices.json")
-  .then(res => res.json())
+  .then(r => r.json())
   .then(data => {
     devices = data;
-    carregarMarcas();
+    if (document.getElementById("marca")) carregarMarcas();
+  })
+  .catch(() => {
+    console.log("Erro ao carregar devices.json");
   });
 
-/* ===============================
-   SPLASH SCREEN
-================================ */
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("app").classList.remove("hidden");
-}, 2000);
-
-/* ===============================
-   SELECTS
-================================ */
 function carregarMarcas() {
   const marca = document.getElementById("marca");
+  if (!marca) return;
+
   marca.innerHTML = `<option value="">Selecione a marca</option>`;
-
-  Object.keys(devices).forEach(m => {
-    marca.innerHTML += `<option value="${m}">${m}</option>`;
-  });
-
-  document.getElementById("categoria").innerHTML =
-    `<option value="">Selecione a marca</option>`;
-  document.getElementById("linha").innerHTML =
-    `<option value="">Selecione a categoria</option>`;
+  Object.keys(devices).forEach(m =>
+    marca.innerHTML += `<option value="${m}">${m}</option>`
+  );
 }
 
 function carregarCategorias() {
-  const marca = document.getElementById("marca").value;
+  const marca = document.getElementById("marca")?.value;
   const categoria = document.getElementById("categoria");
+  if (!categoria || !devices[marca]) return;
+
   categoria.innerHTML = `<option value="">Selecione a categoria</option>`;
-
-  if (devices[marca]) {
-    Object.keys(devices[marca]).forEach(c => {
-      categoria.innerHTML += `<option value="${c}">${c}</option>`;
-    });
-  }
-
-  document.getElementById("linha").innerHTML =
-    `<option value="">Selecione a categoria</option>`;
+  Object.keys(devices[marca]).forEach(c =>
+    categoria.innerHTML += `<option value="${c}">${c}</option>`
+  );
 }
 
 function carregarLinhas() {
-  const marca = document.getElementById("marca").value;
-  const categoria = document.getElementById("categoria").value;
+  const marca = document.getElementById("marca")?.value;
+  const categoria = document.getElementById("categoria")?.value;
   const linha = document.getElementById("linha");
+  if (!linha || !devices[marca]?.[categoria]) return;
 
   linha.innerHTML = `<option value="">Selecione a linha</option>`;
-
-  if (devices[marca] && devices[marca][categoria]) {
-    Object.keys(devices[marca][categoria]).forEach(l => {
-      linha.innerHTML += `<option value="${l}">${l}</option>`;
-    });
-  }
+  Object.keys(devices[marca][categoria]).forEach(l =>
+    linha.innerHTML += `<option value="${l}">${l}</option>`
+  );
 }
 
-/* ===============================
-   GERADOR DE SENSIBILIDADE
-================================ */
 function gerar() {
-  const estilo = Number(document.getElementById("estilo").value);
-  const hz = Number(document.getElementById("hz").value);
+  let sensi = Number(document.getElementById("estilo")?.value || 150);
+  sensi += Number(document.getElementById("hz")?.value || 0);
 
-  const marca = document.getElementById("marca").value;
-  const categoria = document.getElementById("categoria").value;
-  const linha = document.getElementById("linha").value;
+  const dpiVal = document.getElementById("dpi")?.value || "auto";
 
-  const dpiSelect = document.getElementById("dpi").value;
-
-  let sensi = estilo + hz;
-
-  /* ===== PRIORIDADE: DPI MANUAL ===== */
-  if (dpiSelect !== "auto") {
-    const dpi = Number(dpiSelect);
-
+  if (dpiVal !== "auto") {
+    const dpi = Number(dpiVal);
     if (dpi > 480) sensi -= 5;
     else if (dpi < 350) sensi += 10;
     else sensi += 5;
-
-  } 
-  /* ===== AUTOMÁTICO POR LINHA ===== */
-  else if (
-    devices[marca] &&
-    devices[marca][categoria] &&
-    devices[marca][categoria][linha]
-  ) {
-    const d = devices[marca][categoria][linha];
-
-    if (d.dpi > 480) sensi -= 5;
-    else if (d.dpi < 350) sensi += 10;
-    else sensi += 5;
-
-    if (d.tela >= 6.8) sensi += 10;
-    else if (d.tela <= 6.3) sensi -= 10;
   }
 
-  /* ===== LIMITES ===== */
   sensi = Math.max(0, Math.min(200, sensi));
 
-  /* ===== RESULTADO ===== */
-  document.getElementById("resultado").innerHTML = `
-    🎯 <b>Geral:</b> ${sensi}<br><br>
-    🔴 Red Dot: ${sensi - 10}<br>
-    🔍 Mira 2x: ${sensi - 20}<br>
-    🔭 Mira 4x: ${sensi - 40}<br>
-    🎯 Sniper: ${sensi - 80}<br>
-    👁️ Olhadinha: ${sensi - 50}
-  `;
+  const res = document.getElementById("resultado");
+  if (res) {
+    res.innerHTML = `
+      🎯 <b>Geral:</b> ${sensi}<br><br>
+      🔴 Red Dot: ${sensi - 10}<br>
+      🔍 Mira 2x: ${sensi - 20}<br>
+      🔭 Mira 4x: ${sensi - 40}<br>
+      🎯 Sniper: ${sensi - 80}<br>
+      👁️ Olhadinha: ${sensi - 50}
+    `;
+  }
 }
