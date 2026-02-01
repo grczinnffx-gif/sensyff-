@@ -21,6 +21,9 @@ body {
   width: 120px;
   margin-bottom: 15px;
 }
+#splash {
+  display: none !important;
+}
 
 #app {
   max-width: 420px;
