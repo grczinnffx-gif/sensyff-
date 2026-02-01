@@ -1,6 +1,8 @@
 let devices = {};
 
-// Carrega a base de dispositivos
+/* ===============================
+   CARREGAMENTO DA BASE
+================================ */
 fetch("devices.json")
   .then(res => res.json())
   .then(data => {
@@ -8,14 +10,17 @@ fetch("devices.json")
     carregarMarcas();
   });
 
-// Splash screen (2s)
+/* ===============================
+   SPLASH SCREEN
+================================ */
 setTimeout(() => {
   document.getElementById("splash").style.display = "none";
   document.getElementById("app").classList.remove("hidden");
 }, 2000);
 
-// ====== SELECTS ======
-
+/* ===============================
+   SELECTS
+================================ */
 function carregarMarcas() {
   const marca = document.getElementById("marca");
   marca.innerHTML = `<option value="">Selecione a marca</option>`;
@@ -24,7 +29,10 @@ function carregarMarcas() {
     marca.innerHTML += `<option value="${m}">${m}</option>`;
   });
 
-  carregarCategorias();
+  document.getElementById("categoria").innerHTML =
+    `<option value="">Selecione a marca</option>`;
+  document.getElementById("linha").innerHTML =
+    `<option value="">Selecione a categoria</option>`;
 }
 
 function carregarCategorias() {
@@ -38,7 +46,8 @@ function carregarCategorias() {
     });
   }
 
-  carregarLinhas();
+  document.getElementById("linha").innerHTML =
+    `<option value="">Selecione a categoria</option>`;
 }
 
 function carregarLinhas() {
@@ -55,8 +64,9 @@ function carregarLinhas() {
   }
 }
 
-// ====== GERAÇÃO DA SENSIBILIDADE ======
-
+/* ===============================
+   GERADOR DE SENSIBILIDADE
+================================ */
 function gerar() {
   const estilo = Number(document.getElementById("estilo").value);
   const hz = Number(document.getElementById("hz").value);
@@ -64,29 +74,40 @@ function gerar() {
   const marca = document.getElementById("marca").value;
   const categoria = document.getElementById("categoria").value;
   const linha = document.getElementById("linha").value;
-const dpiManual = document.getElementById("dpi").value;
+
+  const dpiSelect = document.getElementById("dpi").value;
 
   let sensi = estilo + hz;
 
-  if (
+  /* ===== PRIORIDADE: DPI MANUAL ===== */
+  if (dpiSelect !== "auto") {
+    const dpi = Number(dpiSelect);
+
+    if (dpi > 480) sensi -= 5;
+    else if (dpi < 350) sensi += 10;
+    else sensi += 5;
+
+  } 
+  /* ===== AUTOMÁTICO POR LINHA ===== */
+  else if (
     devices[marca] &&
     devices[marca][categoria] &&
     devices[marca][categoria][linha]
   ) {
     const d = devices[marca][categoria][linha];
 
-    // Ajuste por DPI
     if (d.dpi > 480) sensi -= 5;
     else if (d.dpi < 350) sensi += 10;
     else sensi += 5;
 
-    // Ajuste por tamanho de tela
     if (d.tela >= 6.8) sensi += 10;
     else if (d.tela <= 6.3) sensi -= 10;
   }
 
+  /* ===== LIMITES ===== */
   sensi = Math.max(0, Math.min(200, sensi));
 
+  /* ===== RESULTADO ===== */
   document.getElementById("resultado").innerHTML = `
     🎯 <b>Geral:</b> ${sensi}<br><br>
     🔴 Red Dot: ${sensi - 10}<br>
