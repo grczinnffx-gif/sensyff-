@@ -1,13 +1,86 @@
 {
   "Samsung": {
-    "Galaxy S23": { "dpi": 425, "tela": 6.1 },
-    "Galaxy S23 Ultra": { "dpi": 500, "tela": 6.8 }
+    "Premium": {
+      "Galaxy S (S21–S26)": { "dpi": 425, "tela": 6.5 },
+      "Galaxy Z (Fold / Flip)": { "dpi": 395, "tela": 7.1 }
+    },
+    "Intermediário": {
+      "Galaxy A (A55 / A56)": { "dpi": 405, "tela": 6.6 },
+      "Galaxy M (M55)": { "dpi": 395, "tela": 6.7 }
+    },
+    "Básico": {
+      "Galaxy A0x (A05 / A06)": { "dpi": 270, "tela": 6.7 }
+    }
   },
+
+  "Apple": {
+    "Premium": {
+      "iPhone (6s ao 17 Pro Max)": { "dpi": 460, "tela": 6.1 }
+    },
+    "Intermediário": {
+      "iPhone SE (1ª–4ª geração)": { "dpi": 326, "tela": 4.7 }
+    }
+  },
+
   "Xiaomi": {
-    "Redmi Note 12": { "dpi": 395, "tela": 6.67 },
-    "POCO X5 Pro": { "dpi": 395, "tela": 6.67 }
+    "Premium": {
+      "Xiaomi 12 ao 15 Ultra": { "dpi": 480, "tela": 6.73 }
+    },
+    "Intermediário": {
+      "Redmi Note": { "dpi": 395, "tela": 6.67 },
+      "POCO F / X": { "dpi": 395, "tela": 6.67 }
+    },
+    "Básico": {
+      "Redmi C / Numéricos": { "dpi": 270, "tela": 6.7 }
+    }
   },
+
   "Motorola": {
-    "Moto G54": { "dpi": 405, "tela": 6.5 }
+    "Premium": {
+      "Edge / Razr": { "dpi": 405, "tela": 6.7 }
+    },
+    "Intermediário": {
+      "Moto G (G50 ao G86)": { "dpi": 395, "tela": 6.6 }
+    },
+    "Básico": {
+      "Moto E": { "dpi": 270, "tela": 6.5 }
+    }
+  },
+
+  "Realme": {
+    "Premium": {
+      "GT Series": { "dpi": 430, "tela": 6.7 }
+    },
+    "Intermediário": {
+      "Numéricos (ex: Realme 13)": { "dpi": 395, "tela": 6.7 }
+    },
+    "Básico": {
+      "Linha C": { "dpi": 270, "tela": 6.7 }
+    }
+  },
+
+  "Infinix": {
+    "Premium": {
+      "Zero": { "dpi": 395, "tela": 6.8 },
+      "GT (Gamer)": { "dpi": 405, "tela": 6.8 }
+    },
+    "Intermediário": {
+      "Note": { "dpi": 395, "tela": 6.8 }
+    },
+    "Básico": {
+      "Hot": { "dpi": 270, "tela": 6.8 }
+    }
+  },
+
+  "Oppo / Vivo": {
+    "Premium": {
+      "Find X / Vivo X": { "dpi": 430, "tela": 6.78 }
+    },
+    "Intermediário": {
+      "Reno / Vivo V": { "dpi": 395, "tela": 6.7 }
+    },
+    "Básico": {
+      "Linha A / Y": { "dpi": 270, "tela": 6.6 }
+    }
   }
 }
