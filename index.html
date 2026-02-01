@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SensyFF</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- TELA DE CARREGAMENTO -->
-<div id="splash">
-  <img src="logo.png" alt="SensyFF">
-  <p>Analisando seu dispositivo...</p>
-</div>
+  <!-- SPLASH / TELA DE CARREGAMENTO -->
+  <div id="splash">
+    <img src="logo.png" alt="SensyFF" />
+    <p>Analisando seu dispositivo...</p>
+  </div>
 
-<!-- APLICATIVO -->
-<div id="app" class="hidden">
+  <!-- APP -->
+  <div id="app" class="hidden">
 
-  <h1>🔥 SensyFF</h1>
+    <h1>🔥 SensyFF</h1>
 
-  <label>🎮 Estilo de jogo</label>
-  <select id="estilo">
-    <option value="165">Rush / X1</option>
-    <option value="150">Balanceado</option>
-    <option value="135">Precisão</option>
-  </select>
+    <!-- ESTILO -->
+    <label>🎮 Estilo de jogo</label>
+    <select id="estilo">
+      <option value="165">Rush / X1</option>
+      <option value="150">Balanceado</option>
+      <option value="135">Precisão</option>
+    </select>
 
-  <label>📱 Marca do celular</label>
-  <select id="marca" onchange="carregarModelos()"></select>
+    <!-- MARCA -->
+    <label>📱 Marca do celular</label>
+    <select id="marca" onchange="carregarCategorias()">
+      <option value="">Carregando marcas...</option>
+    </select>
 
-  <label>📲 Modelo do celular</label>
-  <select id="modelo"></select>
+    <!-- CATEGORIA -->
+    <label>📂 Categoria</label>
+    <select id="categoria" onchange="carregarLinhas()">
+      <option value="">Selecione a marca primeiro</option>
+    </select>
 
-  <label>⚡ Taxa da tela</label>
-  <select id="hz">
-    <option value="0">60 Hz</option>
-    <option value="5">90 Hz</option>
-    <option value="8">120 Hz</option>
-    <option value="10">144 Hz+</option>
-  </select>
+    <!-- LINHA -->
+    <label>📲 Linha / Série</label>
+    <select id="linha">
+      <option value="">Selecione a categoria</option>
+    </select>
 
-  <button onclick="gerar()">GERAR SENSIBILIDADE</button>
+    <!-- HZ -->
+    <label>⚡ Taxa de atualização da tela</label>
+    <select id="hz">
+      <option value="0">60 Hz</option>
+      <option value="5">90 Hz</option>
+      <option value="8">120 Hz</option>
+      <option value="10">144 Hz+</option>
+    </select>
 
-  <div id="resultado"></div>
+    <!-- BOTÃO -->
+    <button onclick="gerar()">GERAR SENSIBILIDADE</button>
 
-</div>
+    <!-- RESULTADO -->
+    <div id="resultado"></div>
 
-<script src="script.js"></script>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
