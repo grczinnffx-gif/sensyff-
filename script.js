@@ -64,6 +64,7 @@ function gerar() {
   const marca = document.getElementById("marca").value;
   const categoria = document.getElementById("categoria").value;
   const linha = document.getElementById("linha").value;
+const dpiManual = document.getElementById("dpi").value;
 
   let sensi = estilo + hz;
 
